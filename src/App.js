@@ -4,15 +4,14 @@ import abi from "./utils/WavePortal.json";
 import './App.css';
 
 export default function App() {
-
- //See if we can access the user's account
- 
+  
   const [currentAccount, setCurrentAccount] = useState("")
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
-  const contractAddress = "0xD617Ec184Ff1769663512F041604A51D4A0d2108"
+  const contractAddress = "0x4A378F422d737e98eDc7Ab1954efF4C2c9260f24"
   const contractABI = abi.abi
-
+  
+  //See if we can access the user's account
   const checkIfWallet = async() => {
     try{
       const { ethereum } = window
@@ -110,15 +109,8 @@ const getAllWaves = async () => {
       const signer = provider.getSigner();
       const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
 
-      /*
-       * Call the getAllWaves method from your Smart Contract
-       */
       const waves = await wavePortalContract.getAllWaves();
 
-      /*
-       * We only need address, timestamp, and message in our UI so let's
-       * pick those out
-       */
       let wavesCleaned = [];
       waves.forEach(wave => {
         wavesCleaned.push({
@@ -128,9 +120,6 @@ const getAllWaves = async () => {
         });
       });
 
-      /*
-       * Store our data in React State
-       */
       setAllWaves(wavesCleaned);
     } else {
       console.log("Ethereum object doesn't exist!")
@@ -154,7 +143,7 @@ const getAllWaves = async () => {
 
         <div className="bio">
             <p> Hi, my name is Daniel and this is my first deployed Ethereum smart contract. </p>
-            <p> Connect your Metamask wallet to give me a message and wave!</p>
+            <p> Connect your Metamask wallet to send me a message and wave!</p>
         </div>
 
         {!currentAccount && (
