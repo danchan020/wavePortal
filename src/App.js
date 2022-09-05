@@ -162,15 +162,15 @@ const getAllWaves = async () => {
             Connect Metamask Wallet
           </button>
         )}
-
+        { currentAccount ? (
         <div class="message-container">
-          { currentAccount ? (<textarea className="message-input"
+          <textarea className="message-input"
           name="messageBox" 
           placeholder="Send me a message..." 
           type="text" 
           value={message}
-          onChange={ e => setMessage(e.target.value)}/>): null}
-        </div>
+          onChange={ e => setMessage(e.target.value)}/>
+        </div>): null}
 
           <button className="button" onClick={wave}>
             Message and Wave
