@@ -8,7 +8,8 @@ export default function App() {
  //See if we can access the user's account
  
   const [currentAccount, setCurrentAccount] = useState("")
-  const contractAddress = "0x46974aeB793c2E3C4470B942cbE5B3458d284a38"
+  const [allWaves, setAllWaves] = useState([]);
+  const contractAddress = "0xD617Ec184Ff1769663512F041604A51D4A0d2108"
   const contractABI = abi.abi
 
   const checkIfWallet = async() => {
@@ -29,6 +30,7 @@ export default function App() {
     const account = accounts[0];
     console.log("Found an authorized account:", account);
     setCurrentAccount(account)
+    getAllWaves()
   } else {
     console.log("No authorized account found")
     }
@@ -97,6 +99,44 @@ const wave = async() => {
   }
 } 
 
+const getAllWaves = async () => {
+  try {
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      const signer = provider.getSigner();
+      const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+      /*
+       * Call the getAllWaves method from your Smart Contract
+       */
+      const waves = await wavePortalContract.getAllWaves();
+
+      /*
+       * We only need address, timestamp, and message in our UI so let's
+       * pick those out
+       */
+      let wavesCleaned = [];
+      waves.forEach(wave => {
+        wavesCleaned.push({
+          address: wave.waver,
+          timestamp: new Date(wave.timestamp * 1000),
+          message: wave.message
+        });
+      });
+
+      /*
+       * Store our data in React State
+       */
+      setAllWaves(wavesCleaned);
+    } else {
+      console.log("Ethereum object doesn't exist!")
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
   useEffect(() => {
     checkIfWallet();
   }, [])
@@ -122,7 +162,15 @@ const wave = async() => {
         <button className="button" onClick={wave} >
           Wave at Me
         </button>
-        <div className="waveCount"> So far I have been waved at x times </div>
+        <div className="waveCount"> So far I have been waved at {allWaves.length} times </div>
+        {/* {allWaves.map((wave, index) => {
+          return (
+            <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
+              <div>Address: {wave.address}</div>
+              <div>Time: {wave.timestamp.toString()}</div>
+              <div>Message: {wave.message}</div>
+            </div>)
+        })} */}
       </div>
     </div>
   );
