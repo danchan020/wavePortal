@@ -45,3 +45,10 @@
   color: rgb(104, 81, 159);
   background-color: bisque;
 }
+
+.waveCount {
+  font-size: 25px;
+  color: whitesmoke;
+  margin-top: 4rem;
+  text-align: center;
+}

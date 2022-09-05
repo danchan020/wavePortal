@@ -15,10 +15,10 @@ export default function App() {
     try{
       const { ethereum } = window
 
-      if (!ethereum){
-        console.log( "Make sure you have a metamask wallet!")
-      } else {
+      if (ethereum){
         console.log("We have the ethereum object", ethereum)
+      } else {
+        console.log( "Make sure you have a metamask wallet!")
       }
 
       //special method to access account in user wallet (eth_accounts)
@@ -95,7 +95,7 @@ const wave = async() => {
   } catch (error) {
     console.log(error);
   }
-}
+} 
 
   useEffect(() => {
     checkIfWallet();
@@ -122,7 +122,7 @@ const wave = async() => {
         <button className="button" onClick={wave} >
           Wave at Me
         </button>
-        <div> </div>
+        <div className="waveCount"> So far I have been waved at x times </div>
       </div>
     </div>
   );
