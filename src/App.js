@@ -9,6 +9,7 @@ export default function App() {
  
   const [currentAccount, setCurrentAccount] = useState("")
   const [allWaves, setAllWaves] = useState([]);
+  const [message, setMessage] = useState("");
   const contractAddress = "0xD617Ec184Ff1769663512F041604A51D4A0d2108"
   const contractABI = abi.abi
 
@@ -63,6 +64,8 @@ const connectWallet = async() => {
 
 const wave = async() => {
   try{
+    setMessage("")
+
     const {ethereum} = window;
     if (ethereum){
       const provider = new ethers.providers.Web3Provider(ethereum);
@@ -82,7 +85,7 @@ const wave = async() => {
       let count = await wavePortalContract.getTotalWaves();
       console.log("Retrieved total wave count...", count.toNumber());
 
-      const waveTxn = await wavePortalContract.wave();
+      const waveTxn = await wavePortalContract.wave(message);
         console.log("Mining...", waveTxn.hash);
 
         await waveTxn.wait();
@@ -151,7 +154,7 @@ const getAllWaves = async () => {
 
         <div className="bio">
             <p> Hi, my name is Daniel and this is my first deployed Ethereum smart contract. </p>
-            <p> Connect your Metamask wallet and give me a wave!</p>
+            <p> Connect your Metamask wallet to give me a message and wave!</p>
         </div>
 
         {!currentAccount && (
@@ -159,18 +162,32 @@ const getAllWaves = async () => {
             Connect Metamask Wallet
           </button>
         )}
-        <button className="button" onClick={wave} >
-          Wave at Me
-        </button>
-        <div className="waveCount"> So far I have been waved at {allWaves.length} times </div>
-        {/* {allWaves.map((wave, index) => {
+
+        <div class="message-container">
+          { currentAccount ? (<textarea className="message-input"
+          name="messageBox" 
+          placeholder="Send me a message..." 
+          type="text" 
+          value={message}
+          onChange={ e => setMessage(e.target.value)}/>): null}
+        </div>
+
+          <button className="button" onClick={wave}>
+            Message and Wave
+          </button>
+
+        <div className="inform"> *refresh after your transaction is completed to see your message* </div>
+        <div className="waveCount"> So far I have been waved at <span>{allWaves.length}</span> times </div>
+        <div className="waves">
+        {allWaves.map((wave, index) => {
           return (
-            <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
-              <div>Address: {wave.address}</div>
-              <div>Time: {wave.timestamp.toString()}</div>
-              <div>Message: {wave.message}</div>
+            <div key={index} className="wave-card">
+              <div className="wave-key">Address: {wave.address}</div>
+              <div className="wave-key">Message: {wave.message}</div>
+              <div className="wave-key">Time: {wave.timestamp.toString()}</div>
             </div>)
-        })} */}
+        })}
+        </div>
       </div>
     </div>
   );
