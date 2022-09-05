@@ -2,33 +2,46 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-top: 64px;
+  height: 100vh;
+  background-color: black;
 }
 
 .dataContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .header {
   text-align: center;
-  font-size: 32px;
+  font-size: 45px;
   font-weight: 600;
+  color: #b61df2;
+  background-image: -webkit-linear-gradient(135deg, #b61df2 25%, #1B6061 50%, #f3961d 75%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
+
 
 .bio {
   text-align: center;
-  color: gray;
+  color: whitesmoke;
   margin-top: 16px;
 }
 
-.waveButton {
+.button {
   cursor: pointer;
-  margin-top: 16px;
+  margin-top: 10px;
   padding: 8px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 8px;
   
+}
+
+.button:hover,
+.button:focus {
+  color: rgb(104, 81, 159);
+  background-color: bisque;
 }

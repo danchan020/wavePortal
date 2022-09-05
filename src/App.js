@@ -87,7 +87,7 @@ const wave = async() => {
         console.log("Mined -- ", waveTxn.hash);
 
         count = await wavePortalContract.getTotalWaves();
-        
+
         console.log("Retrieved total wave count...", count.toNumber());
     } else {
       console.log("Ethereum object does not exist!");
@@ -106,21 +106,23 @@ const wave = async() => {
 
       <div className="dataContainer">
         <div className="header">
-        👋 Hey there!
+          👋  Welcome to my WavePortal!
         </div>
 
         <div className="bio">
-        Connect your Ethereum wallet and wave at me!
+            <p> Hi, my name is Daniel and this is my first deployed Ethereum smart contract. </p>
+            <p> Connect your Metamask wallet and give me a wave!</p>
         </div>
 
-        <button className="waveButton" onClick={wave} >
-          Wave at Me
-        </button>
         {!currentAccount && (
-          <button className="walletButton" onClick={connectWallet}>
+          <button className="button" onClick={connectWallet}>
             Connect Metamask Wallet
           </button>
         )}
+        <button className="button" onClick={wave} >
+          Wave at Me
+        </button>
+        <div> </div>
       </div>
     </div>
   );
