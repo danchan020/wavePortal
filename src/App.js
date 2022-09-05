@@ -178,16 +178,17 @@ const getAllWaves = async () => {
 
         <div className="inform"> *refresh after your transaction is completed to see your message* </div>
         <div className="waveCount"> So far I have been waved at <span>{allWaves.length}</span> times </div>
-        <div className="waves">
-        {allWaves.map((wave, index) => {
-          return (
-            <div key={index} className="wave-card">
-              <div className="wave-key">Address: {wave.address}</div>
-              <div className="wave-key">Message: {wave.message}</div>
-              <div className="wave-key">Time: {wave.timestamp.toString()}</div>
-            </div>)
-        })}
-        </div>
+          {allWaves.length > 0 ? 
+            <div className="waves">
+              {allWaves.map((wave, index) => {
+                return (
+                    <div key={index} className="wave-card">
+                      <div className="wave-key">Address: {wave.address}</div>
+                      <div className="wave-key">Message: {wave.message}</div>
+                      <div className="wave-key">Time: {wave.timestamp.toString()}</div>
+                  </div>)
+              })}
+            </div> : null}
       </div>
     </div>
   );
