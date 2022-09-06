@@ -4,6 +4,7 @@ This project was a Solidity tutorial from Buildspace. Front end design was handl
 <br>
 <br>
 To see the github repository to the smart contract: https://github.com/danchan020/wavePortalSmartContract
+<br>
 To visit the live website: https://dcwaveportal.vercel.app/
 
 ## Overview
