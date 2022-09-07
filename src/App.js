@@ -8,7 +8,7 @@ export default function App() {
   const [currentAccount, setCurrentAccount] = useState("")
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
-  const contractAddress = "0x51783e7515D6e86b0E56D446b1252195AbC79Bae"
+  const contractAddress = "0x3D0fed7fCb34F790D9312E2346AB01EE4f75A8AF"
   const contractABI = abi.abi
   
   //See if we can access the user's account
@@ -146,7 +146,7 @@ const getAllWaves = async () => {
     }, [])
     
     // Listen for emitter event 
-    
+
   useEffect(() => {
     let wavePortalContract;
 

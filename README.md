@@ -1,6 +1,6 @@
 # WavePortal
 
-This project was a Solidity tutorial from Buildspace. Front end design was handled myself while the tutorial covered using Hardhat as a development environment, writing  and deploying Solidity smart contracts, and creating the connection between the contract and client. 
+This project was a Solidity tutorial from Buildspace. Front end design and deployment was handled myself while the tutorial covered using Hardhat as a development environment, writing and deploying Solidity smart contracts, and creating the connection between the contract and client. 
 <br>
 <br>
 To visit the live website: https://dcwaveportal.vercel.app/
@@ -17,5 +17,5 @@ To see the github repository to the smart contract: https://github.com/danchan02
 ## To interact with the app
 
 - Add Goerli testnet network to Metamask wallet and switch to the network
-- Fund wallet with Goerli ETH for gas fee through https://goerlifaucet.com/
-- Send me a message and wave; make sure to approve the transaction with the testnet ETH!
+- Fund your wallet with Goerli ETH for the transaction gas fee through https://goerlifaucet.com/
+- Send me a message and wave; make sure to sign and approve the transaction!
