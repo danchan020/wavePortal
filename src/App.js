@@ -111,15 +111,29 @@ const getAllWaves = async () => {
 
       const waves = await wavePortalContract.getAllWaves();
 
-      const wavesCleaned = waves.map((wave) => {
-        return {
-            address: wave.waver,
-            timestamp: new Date(wave.timestamp * 1000),
-            message: wave.message,
-        };
-    });
+      let wavesCleaned = [];
+      waves.forEach(wave => {
+        wavesCleaned.push({
+          address: wave.waver,
+          timestamp: new Date(wave.timestamp * 1000),
+          message: wave.message
+        });
+      });
 
       setAllWaves(wavesCleaned);
+
+      // Listen for emitter event 
+      
+          wavePortalContract.on("NewWave", (from, timestamp,message) => {
+          console.log("NewWave", from, timestamp, message);
+          setAllWaves(prevState => [...prevState,
+            {
+              address: from,
+              timestamp: new Date(timestamp * 1000),
+              message: message,
+            }]);
+        })
+
     } else {
       console.log("Ethereum object doesn't exist!")
     }
@@ -128,41 +142,9 @@ const getAllWaves = async () => {
   }
 }
 
-useEffect(() => {
-  checkIfWallet();
-}, [])
-
-// Listen for emitter event 
-
   useEffect(() => {
-    let wavePortalContract;
-
-    const onNewWave = (from, timestamp, message) => {
-        console.log("NewWave", from, timestamp, message);
-        setAllWaves((prevState) => [
-            ...prevState,
-            {
-                address: from,
-                timestamp: new Date(timestamp * 1000),
-                message: message,
-            },
-        ]);
-    };
-
-    if (window.ethereum) {
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-
-        wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
-        wavePortalContract.on("NewWave", onNewWave);
-    }
-
-    return () => {
-        if (wavePortalContract) {
-            wavePortalContract.off("NewWave", onNewWave);
-        }
-    };
-}, []);
+    checkIfWallet();
+  }, [])
 
   return (
     <div className="mainContainer">
