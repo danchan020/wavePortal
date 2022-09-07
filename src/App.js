@@ -122,29 +122,60 @@ const getAllWaves = async () => {
 
       setAllWaves(wavesCleaned);
 
-      // Listen for emitter event 
       
-          wavePortalContract.on("NewWave", (from, timestamp,message) => {
-          console.log("NewWave", from, timestamp, message);
-          setAllWaves(prevState => [...prevState,
-            {
-              address: from,
-              timestamp: new Date(timestamp * 1000),
-              message: message,
-            }]);
-        })
-
-    } else {
-      console.log("Ethereum object doesn't exist!")
+      //   wavePortalContract.on("NewWave", (from, timestamp,message) => {
+        //   console.log("NewWave", from, timestamp, message);
+        //   setAllWaves(prevState => [...prevState,
+        //     {
+          //       address: from,
+          //       timestamp: new Date(timestamp * 1000),
+          //       message: message,
+          //     }]);
+          // })
+          
+        } else {
+          console.log("Ethereum object doesn't exist!")
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
+    
+    useEffect(() => {
+      checkIfWallet();
+    }, [])
+    
+    // Listen for emitter event 
+    
   useEffect(() => {
-    checkIfWallet();
-  }, [])
+    let wavePortalContract;
+
+    const onNewWave = (from, timestamp, message) => {
+        console.log("NewWave", from, timestamp, message);
+        setAllWaves((prevState) => [
+            ...prevState,
+            {
+                address: from,
+                timestamp: new Date(timestamp * 1000),
+                message: message,
+            },
+        ]);
+    };
+
+    if (window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+
+        wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+        wavePortalContract.on("NewWave", onNewWave);
+    }
+
+    return () => {
+        if (wavePortalContract) {
+            wavePortalContract.off("NewWave", onNewWave);
+        }
+    };
+}, []);
 
   return (
     <div className="mainContainer">
@@ -178,7 +209,7 @@ const getAllWaves = async () => {
             Message and Wave
           </button>
 
-        <div className="inform"> *refresh after your transaction is completed to see your message* </div>
+        <div className="inform"> *there is a 1 minute cooldown per wave* </div>
         <div className="waveCount"> So far I have been waved at <span>{allWaves.length}</span> times </div>
           {allWaves.length > 0 ? 
             <div className="waves">
