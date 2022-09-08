@@ -209,7 +209,7 @@ const getAllWaves = async () => {
             Message and Wave
           </button>
 
-        <div className="inform"> *there is a 1 minute cooldown per wave* </div>
+        <div className="inform"> *there is a 5 minute cooldown per wave* </div>
         <div className="waveCount"> So far I have been waved at <span>{allWaves.length}</span> times </div>
           {allWaves.length > 0 ? 
             <div className="waves">
