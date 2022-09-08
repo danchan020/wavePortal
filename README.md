@@ -10,7 +10,7 @@ To see the github repository to the smart contract: https://github.com/danchan02
 ## Overview
 
 - Users are able to connect Ethereum wallet to the browser
-- Users can send a message and wave to the smart contract after signature approval
+- Users can send a message and wave on the Ethereum blockchain (testnet) after signature approval
 - Wave count and messages will be updated and displayed on the front end
 - Each wave will have a 50% chance of winning Goerli testnet ETH!
 
