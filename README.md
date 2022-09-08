@@ -19,3 +19,19 @@ To see the github repository to the smart contract: https://github.com/danchan02
 - Add Goerli testnet network to Metamask wallet and switch to the network
 - Fund your wallet with Goerli ETH for the transaction gas fee through https://goerlifaucet.com/
 - Send me a message and wave; make sure to sign and approve the transaction!
+
+## GIFs
+
+<div align="center">
+
+| <img src="public/wallet.gif" width="650"> |
+:-------------------------:
+| Metamask wallet integration |
+
+<br>
+
+| <img src="public/wavenmessage.gif" width="650"> |
+:-------------------------:
+| Sending a wave and message on the ETH blockchain (testnet)|
+  
+</div>
