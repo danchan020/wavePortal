@@ -8,7 +8,7 @@ export default function App() {
   const [currentAccount, setCurrentAccount] = useState("")
   const [allWaves, setAllWaves] = useState([]);
   const [message, setMessage] = useState("");
-  const contractAddress = "0x3D0fed7fCb34F790D9312E2346AB01EE4f75A8AF"
+  const contractAddress = "0x4f11ab9eE0F504ED660450182fbc9461A424A205"
   const contractABI = abi.abi
   
   //See if we can access the user's account
