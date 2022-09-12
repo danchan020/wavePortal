@@ -3,9 +3,9 @@
 This project was a Solidity tutorial from Buildspace. Front end design and deployment was handled myself while the tutorial covered using Hardhat as a development environment, writing and deploying Solidity smart contracts, and creating the connection between the contract and client. 
 <br>
 <br>
+To watch the <a href="https://www.loom.com/share/1d3c53bee70b4612b5ffd2e527ab935a"> Demo </a> <br>
 To visit the live website: https://dcwaveportal.vercel.app/
 <br>
-To watch the <a href="https://www.loom.com/share/1d3c53bee70b4612b5ffd2e527ab935a"> Demo </a> <br>
 To see the github repository to the smart contract: https://github.com/danchan020/wavePortalSmartContract
 
 ## Overview
